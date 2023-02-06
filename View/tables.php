@@ -4,6 +4,10 @@
 <?php
 include_once('../srv/config.php');
 $user = read('');
+if (isset($_POST['logout']) || empty($_SESSION['user'])) {
+    logout();
+}
+
 ?>
 
 <head>
@@ -38,10 +42,7 @@ $user = read('');
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Wes Makmur <sup><?= $_SESSION['user']['role'] ?></sup></div>
             </a>
 
             <!-- Divider -->
@@ -49,7 +50,7 @@ $user = read('');
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="javascript:history.back()">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -71,8 +72,8 @@ $user = read('');
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="editblog.html">Manage Blog</a>
+                        <a class="collapse-item" href="tables.php">Manage Users</a>
                     </div>
                 </div>
             </li>
@@ -107,7 +108,7 @@ $user = read('');
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="tables.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
@@ -319,62 +320,12 @@ $user = read('');
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <?php if ($_SESSION['user']['role'] == 'admin') :
+                    include_once('./tables2.php');
+                else :
+                    include_once('./403.php');
+                endif; ?>
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Email/Username</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Email/Username</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php $i = 1 ?>
-                                        <?php if (mysqli_num_rows($user) > 0) :
-                                            foreach ($user as $usr) : ?>
-                                                <tr>
-                                                    <td><?= $i ?></td>
-                                                    <td><?= $usr['user_id'] ?></td>
-                                                    <td><?= $usr['username'] ?></td>
-                                                    <td><?= $usr['role'] ?></td>
-                                                    <td><a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
-                                                        <button class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
-                                            <?php $i++;
-                                            endforeach; ?>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -412,10 +363,10 @@ $user = read('');
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
+                <form class="modal-footer" method="post">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
+                    <button class="btn btn-primary" type="submit" href="" name="logout">Logout</button>
+                </form>
             </div>
         </div>
     </div>

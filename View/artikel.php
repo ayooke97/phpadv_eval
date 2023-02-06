@@ -1,8 +1,8 @@
-<article class="col-8 p-3 rounded-4 border border-2">
+<article class="col-8 p-3 my-4 rounded-4 border border-2">
     <?php if (isset($_SESSION['user'])) : ?>
         <?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'editor') : ?>
             <a href="main_<?= $_SESSION['user']['role'] ?>.php" class="btn btn-primary">Menu <?= ucfirst($_SESSION['user']['role']) ?></a>
-        <?php elseif ($_SESSION['user']['role'] == 'user') : ?>
+        <?php elseif ($_SESSION['user']['role'] == 'ordinaryuser') : ?>
             <h1>User</h1>
         <?php endif ?>
     <?php else : ?>

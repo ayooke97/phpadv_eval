@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <?php
 include_once("../srv/config.php");
-if (empty($_SESSION['user'])) {
+if (empty($_SESSION['user']) || isset($_POST['logout'])) {
     header('Location:./403.php');
-}
-if (isset($_POST['logout'])) {
     logout();
 }
 ?>
@@ -69,8 +67,8 @@ if (isset($_POST['logout'])) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Options:</h6>
-                        <a class="collapse-item" href="buttons.html">Manage Blog</a>
-                        <a class="collapse-item" href="cards.html">Manage Users</a>
+                        <a class="collapse-item" href="main_admin.php">Manage Blog</a>
+                        <a class="collapse-item" href="tables.php">Manage Users</a>
                     </div>
                 </div>
             </li>

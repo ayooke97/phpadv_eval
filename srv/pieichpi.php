@@ -1,2 +1,2 @@
 <?php
-echo password_hash('bakti12356', PASSWORD_DEFAULT);
+echo password_hash('bakti123567', PASSWORD_DEFAULT) . "<br />";

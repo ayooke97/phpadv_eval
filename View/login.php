@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
 if (isset($_SESSION['user'])) {
     header('Location:main.php');
 }
-var_dump($_SESSION);
+
 ?>
 
 

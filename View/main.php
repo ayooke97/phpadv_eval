@@ -6,12 +6,10 @@ if (isset($_SESSION['user'])) {
         header("location:./admin.php");
     }
 }
-if (isset($_GET['logout'])) {
+if (isset($_POST['logout'])) {
     logout();
 }
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+
 ?>
 <html lang="en">
 
@@ -30,6 +28,30 @@ echo "</pre>";
             <?php include_once "./artikel.php"; ?>
             <aside class="col-4">
                 Artikel terkait
+                <div class="row px-3 d-flex gap-3">
+                    <div class="w-100 border border-2 rounded-4">
+                        <section>
+                            <h3>Judul 1</h3>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque, doloremque?...</p>
+                            <div class="d-flex w-100 align-items-center">
+
+                                <div class="w-50">
+                                    <p>Author</p>
+                                    <p>Tanggal Posting</p>
+                                </div>
+                                <div class="w-50 text-end px-3">
+                                    <a href="./judul">Read More...</a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="w-100 border border-2 rounded-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit facilis illo mollitia hic atque, sit nisi assumenda tenetur qui, doloribus laboriosam quae pariatur numquam neque placeat fugiat, voluptatum dignissimos provident. In repellat expedita perferendis fugiat, tempora libero odit neque similique optio ratione dolore officiis accusantium esse explicabo, ipsam eligendi temporibus?
+                    </div>
+                    <div class="w-100 border border-2 rounded-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit facilis illo mollitia hic atque, sit nisi assumenda tenetur qui, doloribus laboriosam quae pariatur numquam neque placeat fugiat, voluptatum dignissimos provident. In repellat expedita perferendis fugiat, tempora libero odit neque similique optio ratione dolore officiis accusantium esse explicabo, ipsam eligendi temporibus?
+                    </div>
+                </div>
             </aside>
         </div>
     </main>

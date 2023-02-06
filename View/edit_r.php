@@ -3,7 +3,7 @@ include_once '../srv/config.php';
 
 // $id =  base64_decode($_GET['user_id'], 1);
 $id = $_GET['user_id'];
-$query = mysqli_query($conn, "SELECT * FROM user WHERE user_id=$id");
+$query = mysqli_query($conn, "SELECT * FROM user WHERE id_blog=$id");
 $user = mysqli_fetch_assoc($query);
 // var_dump($result);
 
@@ -31,17 +31,15 @@ if (isset($_POST['submit'])) {
             <div class="card-body">
                 <form action="" method="post" class="">
                     <div class="form-group">
-                        <label for="Judulbuku">Username / Email</label>
+                        <label for="Judul">Judul blog</label>
                         <input type="text" name="username" value="<?= $user['username'] ?>" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="penerbit">Password</label>
-                        <input type="password" name="pass" value="" class="form-control">
+                        <label for="penerbit">Isi</label>
+                        <textarea name="sinopsis" id="" cols="" rows="10" class="form-control"><?= $result['sinopsis'] ?></textarea>
                     </div>
-                    <label for="th_terbit">Re-Enter Password</label>
-                    <input type="text" name="rpass" value="" class="form-control">
-                    <label for="sinopsis">Sinopsis</label>
-                    <!-- <textarea name="sinopsis" id="" cols="" rows="10" class="form-control"><?= $result['sinopsis'] ?></textarea> -->
+                    <label for="tglposting">Tanggal Posting</label>
+                    <input type="text" name="rpass" value="" class="form-control" disabled>
                     <button class="mt-4 btn btn-success btn-block" type="submit" name="submit">Submit</button>
                 </form>
             </div>

@@ -104,27 +104,44 @@ function read($data = '')
     return $query;
 }
 
-function edit($data, $id)
+function editUser($data, $id, $conn)
 {
-    global $conn;
     $username = $data['username'];
     $pass = mysqli_real_escape_string($conn, $data['pass']);
     $rpass = mysqli_real_escape_string($conn, $data['rpass']);
-    if ($pass !== $rpass) {
-        echo '<script>alert("Password tidak sama")</script>';
-        $_SESSION['edit'] = $data;
-    } else if ($pass == '' || $rpass == '') {
-        echo '<script>alert("Password tidak boleh kosong")</script>';
-        $_SESSION['edit'] = $data;
+
+    if ($pass === '' || $rpass === '') {
+        return false;
+    } elseif ($pass !== $rpass) {
+        return false;
     } else {
-        $h_pass = password_hash($pass, PASSWORD_DEFAULT);
-        $query = mysqli_query($conn, "UPDATE user SET username = '{$username}', password = '{$h_pass}' WHERE user_id=$id");
-        echo '<script>alert("Edit berhasil")</script>';
-        unset($_SESSION['edit']);
-        header("Location:tables.php");
-        return $query;
+        $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+        $query = "UPDATE user SET username = '{$username}', password = '{$hashedPassword}' WHERE user_id={$id}";
+        mysqli_query($conn, $query);
+        return true;
     }
 }
+
+function alert($message, $isSuccess)
+{
+    if (!$isSuccess) {
+        echo '<script>
+    alert("Password tidak boleh kosong atau password tidak sama")
+</script>';
+    } else {
+        echo '<script>
+    alert("Edit berhasil")
+</script>';
+        header("Location:tables.php");
+    }
+}
+
+$data = $_SESSION['edit'];
+$id = $_POST['id'];
+global $conn;
+
+$isSuccess = editUser($data, $id, $conn);
+alert($message, $isSuccess);
 
 function delete()
 {

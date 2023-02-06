@@ -21,7 +21,9 @@
                     </li>
                 </div>
                 <?php if (isset($_SESSION['user'])) : ?>
-                    <button type="submit" class="btn btn-outline-danger" name="logout">Logout</button>
+                    <form action="" method="post">
+                        <button type="submit" class="btn btn-outline-danger" name="logout">Logout</button>
+                    </form>
                 <?php else : ?>
                     <div class="d-flex gap-2">
                         <a class="btn btn-outline-warning" href="register.php">Sign Up</a>
