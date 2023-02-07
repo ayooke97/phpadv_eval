@@ -110,6 +110,7 @@ function edit($data, $id)
     $username = $data['username'];
     $pass = mysqli_real_escape_string($conn, $data['pass']);
     $rpass = mysqli_real_escape_string($conn, $data['rpass']);
+    $role = $data['role'];
     if ($pass !== $rpass) {
         echo '<script>alert("Password tidak sama")</script>';
         $_SESSION['edit'] = $data;
@@ -118,7 +119,7 @@ function edit($data, $id)
         $_SESSION['edit'] = $data;
     } else {
         $h_pass = password_hash($pass, PASSWORD_DEFAULT);
-        $query = mysqli_query($conn, "UPDATE user SET username = '{$username}', password = '{$h_pass}' WHERE user_id=$id");
+        $query = mysqli_query($conn, "UPDATE user SET username = '{$username}', password = '{$h_pass}', role = '{$role}' WHERE user_id=$id");
         echo '<script>alert("Edit berhasil")</script>';
         unset($_SESSION['edit']);
         header("Location:tables.php");

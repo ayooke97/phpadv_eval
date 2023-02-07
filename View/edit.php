@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="container">
-        <div class="card">
+        <div class="card my-3">
             <div class="card-body">
                 <form action="" method="post" class="">
                     <div class="form-group">
@@ -40,8 +40,15 @@ if (isset($_POST['submit'])) {
                     </div>
                     <label for="th_terbit">Re-Enter Password</label>
                     <input type="text" name="rpass" value="" class="form-control">
-                    <label for="sinopsis">Sinopsis</label>
-                    <!-- <textarea name="sinopsis" id="" cols="" rows="10" class="form-control"><?= $result['sinopsis'] ?></textarea> -->
+                    <label for="sinopsis">Role</label>
+                    <div class="d-flex my-2 gap-2">
+                        <input type="radio" name="role" id="" value="admin" <?= $user['role'] == 'admin' ? 'checked' : '' ?>>
+                        <label for="admin">Admin</label>
+                        <input type="radio" name="role" id="" value="editor" <?= $user['role'] == 'editor' ? 'checked' : '' ?>>
+                        <label for="editor">Editor</label>
+                        <input type="radio" name="role" id="" value="ordinaryuser" <?= $user['role'] == 'ordinaryuser' ? 'checked' : '' ?>>
+                        <label for="user">User</label>
+                    </div>
                     <button class="mt-4 btn btn-success btn-block" type="submit" name="submit">Submit</button>
                 </form>
             </div>
