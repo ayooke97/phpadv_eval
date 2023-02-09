@@ -29,7 +29,7 @@ if (isset($_SESSION['user'])) {
         <form action="" method="post" class="w-50 mx-auto">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="email" class="form-control" id="email" name="username" value="<?= isset($_SESSION['login_input']) ? $_SESSION['login_input']['username'] : '' ?>" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="email" name="username" value="<?= isset($_SESSION['login_input']) ? $_SESSION['login_input']['username'] : '' ?>" aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">

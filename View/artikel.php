@@ -90,7 +90,8 @@
                     <p>Nama : <?= $_POST['nama'] ?></p>
                     <p>Umur : <?= $saran->umur($_POST['tgl_lahir']) ?> tahun</p>
                     <p>Jamu rekomendasi : <?= $saran->namaJamu($_POST['keluhan1'], $_POST['keluhan2']) ?></p>
-                    <p>Saran : <?= $saran->Saran() ?></p>
+                    <?= $saran->Saran() ?>
+
                 <?php endif; ?>
             </div>
         </div>
