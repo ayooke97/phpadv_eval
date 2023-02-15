@@ -3,7 +3,7 @@
 <html lang="en">
 <?php
 include_once('../srv/config.php');
-$user = read('');
+$user = read('user');
 if (isset($_POST['logout']) || empty($_SESSION['user'])) {
     logout();
 }

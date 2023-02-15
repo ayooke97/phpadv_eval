@@ -9,7 +9,7 @@ $user = mysqli_fetch_assoc($query);
 
 if (isset($_POST['submit'])) {
     var_dump($_POST);
-    edit($_POST, $id);
+    edit_user($_POST, $id);
 }
 
 ?>

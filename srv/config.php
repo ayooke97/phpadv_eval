@@ -92,11 +92,18 @@ function register()
     }
 }
 
-function read($data = '')
+function read($data)
 {
     global $conn;
-    if (empty($data)) {
-        $data = 'user';
+    switch ($data) {
+        case 'user':
+            $data = 'user';
+            break;
+        case 'post':
+            $data = 'post';
+            break;
+        case 'produk':
+            $data = 'produk';
     }
     // var_dump($data);
     // die;
@@ -104,7 +111,7 @@ function read($data = '')
     return $query;
 }
 
-function edit($data, $id)
+function edit_user($data, $id)
 {
     global $conn;
     $username = $data['username'];
@@ -127,7 +134,7 @@ function edit($data, $id)
     }
 }
 
-function delete()
+function delete_user()
 {
     global $conn;
     $id = $_POST['id'];
@@ -136,4 +143,132 @@ function delete()
         header("Location:tables.php");
     }
     return $query;
+}
+
+function edit_post($data, $id)
+{
+    global $conn;
+    $judul = $_POST['judul'];
+    $isi = $_POST['isi'];
+    $tanggal = $_POST['tanggal'];
+    $query = "UPDATE post SET judul = '{$judul}', isi = '{$isi}', tanggalDibuat = '{$tanggal}' WHERE idPostingan=$id";
+    $stmt = mysqli_query($conn, $query);
+    return $stmt;
+}
+
+function delete_post()
+{
+    global $conn;
+    $id = $_POST['id'];
+    $query = mysqli_query($conn, "DELETE FROM post WHERE idPostingan= $id");
+    if ($query) {
+        header("Location:tables.php");
+    }
+    return $query;
+}
+
+function edit_produk($data, $id)
+{
+    $namaProduk = $_POST['nama_produk'];
+    $harga = $_POST['harga'];
+    $foto = $_FILES['foto']['name'];
+    $desc = $_POST['desc'];
+    global $conn;
+    $query = "UPDATE produk SET namaProduk = '{$namaProduk}', foto = '{$foto}', harga = '{$harga}',descProduk = '{$desc}' WHERE id_produk=$id";
+    $stmt = mysqli_query($conn, $query);
+    return $stmt;
+}
+
+function delete_produk()
+{
+    global $conn;
+    $id = $_POST['id'];
+    $query = mysqli_query($conn, "DELETE FROM produk WHERE id_produk= $id");
+    if ($query) {
+        header("Location:tables.php");
+    }
+    return $query;
+}
+
+function tambah_produk()
+{
+
+    $namaProduk = $_POST['nama_produk'];
+    $harga = $_POST['harga'];
+    $foto = $_FILES['foto']['full_path'];
+    $desc = $_POST['desc'];
+    global $conn;
+    if ($foto != "") {
+        $allowed_ext = ["jpg", "jpeg", "png"];
+        $x = explode('.', $foto);
+        $ext = strtolower(end($x));
+        $file_temp = $_FILES['foto']['tmp_name'];
+        $random_name = rand(1, 999) . '-' . $foto;
+        $size = $_FILES["foto"]["size"];
+        if ($size > 5242880) {
+            echo "<script>alert('File terlalu besar')</script>";
+            echo '<script>window.location.replace("create.php");</script>';
+        } else {
+            if (in_array($ext, $allowed_ext) === true) {
+                move_uploaded_file($file_temp, "../View/img/" . $random_name);
+                $query = mysqli_query($conn, "INSERT INTO produk (idProduk,namaProduk,foto,harga,descProduk) VALUES ('','$namaProduk','$random_name','$harga','$desc')");
+                header('location:admin.php');
+            }
+        }
+    }
+}
+
+function read_produk($data = '')
+{
+    global $conn;
+    if (empty($data)) {
+        $data = 'produk';
+    }
+    // var_dump($data);
+    // die;
+    $query = mysqli_query($conn, "SELECT * FROM $data");
+    return $query;
+}
+
+function read_post($data = '')
+{
+    global $conn;
+    if (empty($data)) {
+        $data = 'post';
+    }
+    // var_dump($data);
+    // die;
+    $query = mysqli_query($conn, "SELECT * FROM $data");
+    return $query;
+}
+
+function tambah_post()
+{
+    global $conn;
+    $judul = $_POST['judul'];
+    $isi = $_POST['isi'];
+    $userid = $_POST['id'];
+    $kategori = $_POST['kategori'];
+    $tanggal = date("Y-m-d");
+    if (empty($judul)) {
+        echo "<script>alert('Judul wajib diisi')</script>";
+    }
+    $check = mysqli_query($conn, "SELECT * FROM post WHERE judul = '$judul'");
+    if (mysqli_num_rows($check) > 0) {
+        echo "<script>alert('Judul sudah ada')</script>";
+        $_SESSION['judul'] = $_POST;
+    } else {
+        $query = "INSERT INTO post (idPostingan,judul,isi,tanggalDibuat,kategoriID,user_id) VALUES ('', '$judul', '$isi',$tanggal,'$kategori','$userid')";
+        if (isset($_SESSION['judul'])) {
+            unset($_SESSION['judul']);
+        }
+        $exec = mysqli_query($conn, $query);
+        echo "<script>alert('Blog berhasil ditambah!')</script>";
+        // echo '<meta http-equiv="refresh" content="1; url=admin.php" />';
+
+        header('location:../View/admin.php');
+        return $exec;
+    }
+    // $stmt = mysqli_query($conn, $query);
+    // return $stmt;
 }
