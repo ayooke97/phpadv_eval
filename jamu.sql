@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2023 at 08:51 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Mar 02, 2023 at 05:41 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,15 @@ CREATE TABLE `kategori` (
   `idKategori` int(11) NOT NULL,
   `namaKategori` char(50) NOT NULL,
   `descKategori` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`idKategori`, `namaKategori`, `descKategori`) VALUES
+(1, 'Tech', 'Teknologi'),
+(2, 'Tech', 'Teknologi');
 
 -- --------------------------------------------------------
 
@@ -46,7 +54,7 @@ CREATE TABLE `post` (
   `tanggalDibuat` date DEFAULT current_timestamp(),
   `kategoriID` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `post`
@@ -75,7 +83,14 @@ INSERT INTO `post` (`idPostingan`, `judul`, `isi`, `tanggalDibuat`, `kategoriID`
 (39, 'awokaowkoawkoakwoakwoakwoe', 'dfbdfbdfbdfbdfbdfbdfb', '0000-00-00', 4, 1),
 (40, 'fnvcbnvcbnvcbn', 'hgjghkkgh,gh,gh,gh', '0000-00-00', 1, 1),
 (41, 'dfbfdfbdf', 'ASasAS', '0000-00-00', 1, 1),
-(42, 'dfbfdfbdfdsvsdv', 'ASasAS', '0000-00-00', 1, 1);
+(42, 'dfbfdfbdfdsvsdv', 'ASasAS', '0000-00-00', 1, 1),
+(43, 'random', 'sdlkfjsklfjlksdjflksdjflksdjflksjdklf', '0000-00-00', 1, 1),
+(44, 'Lorem ipsumsf', 'dfgdsagdfsgdsfsgdfg', '2023-02-22', 1, 1),
+(45, 'sdgsdsdgsdgsdgxzvx', 'dfssdfsfsdzc', '2023-02-22', 5, 1),
+(46, 'sdgvgsdfsdgsdbcvbv v', 'sdfsdfsdfsdfsdf', '2023-02-22', 3, 1),
+(47, 'vbbmvbvb ', 'bnmbnnmnbmbnmnbm', '2023-02-22', 4, 1),
+(48, 'sfdlghjkdfghkjlfd', 'xncvb,cxcbvnmxcbmnvbxcnmvbxcm', '2023-02-22', 1, 1),
+(49, 'LOOOOLLLL', 'SDJFHLKSDHJKSDHFJHSDJKFHSDKJFHJSKDHFJKSDHFJKSD', '2023-02-22', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -90,14 +105,15 @@ CREATE TABLE `produk` (
   `harga` int(11) NOT NULL,
   `descProduk` text NOT NULL,
   `kategoriID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`idProduk`, `namaProduk`, `foto`, `harga`, `descProduk`, `kategoriID`) VALUES
-(1, 'fdjddjjf', '311-Capture.PNG', 50000, 'kjkjkjkjk', 0);
+(3, 'r1', 'r1.jpg', 50000, 'kosong', 1),
+(4, 'r2', 'r2.jpg', 100000, 'Kualitas Ori!', 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +126,7 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(128) DEFAULT NULL,
   `role` enum('admin','editor','ordinaryuser') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -136,7 +152,8 @@ ALTER TABLE `kategori`
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`idPostingan`);
+  ADD PRIMARY KEY (`idPostingan`),
+  ADD KEY `fk_user_post` (`user_id`);
 
 --
 -- Indexes for table `produk`
@@ -156,16 +173,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `idPostingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `idPostingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -182,6 +205,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_user_post` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `produk`
+--
+ALTER TABLE `produk`
+  ADD CONSTRAINT `fk_kategori_produk` FOREIGN KEY (`kategoriID`) REFERENCES `kategori` (`idKategori`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
