@@ -13,7 +13,7 @@ $user = read('post');
 $query = mysqli_query($conn, "SELECT * FROM post");
 $post = mysqli_fetch_assoc($query);
 
-var_dump(mysqli_num_rows($query));
+
 
 ?>
 <html lang="en">
@@ -33,14 +33,14 @@ var_dump(mysqli_num_rows($query));
 
             <?php if (mysqli_num_rows($user) > 0) :
                 $i = 1; ?>
-                <?php foreach ($user as $user) : ?>
+                <?php foreach ($user as $usr) : ?>
                     <div class="col-4 pb-3">
                         <article class="card w-100">
                             <img src="..." class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $i ?></h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-success">Go somewhere</a>
+                                <a href="./main.php?id=<?= $post['idPostingan'] ?>" class="btn btn-success">Go somewhere</a>
                             </div>
                         </article>
                     </div>

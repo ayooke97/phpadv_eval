@@ -35,12 +35,10 @@ function login()
             ];
             unset($_SESSION['login_input']);
 
-            if ($row['role'] == 'admin') {
+            if ($row['role'] == 'admin' || $row['role'] == 'editor') {
                 header('location:admin.php');
-            } else if ($row['role'] == 'editor') {
-                header('location:main.php');
             } else {
-                header('location:main.php');
+                header('location:blogmenu.php');
             }
         } else {
             echo '<script type="text/javascript">alert("Password Salah")</script>';
@@ -62,7 +60,7 @@ function login()
 function logout()
 {
     unset($_SESSION['user']);
-    header('location:main.php');
+    header('location:login.php');
 }
 function register()
 {

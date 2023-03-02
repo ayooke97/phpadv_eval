@@ -3,12 +3,16 @@
 include_once "../srv/config.php";
 if (isset($_SESSION['user'])) {
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'editor') {
-        header("location:./admin.php");
+        // header("location:./admin.php");
     }
 }
 if (isset($_POST['logout'])) {
     logout();
 }
+
+$id = $_GET['id'];
+$query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan = $id");
+$show = mysqli_fetch_assoc($query);
 
 ?>
 <html lang="en">

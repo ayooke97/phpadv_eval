@@ -6,10 +6,9 @@ $id =  base64_decode($_GET['idPostingan'], 1);
 // $query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan=$id");
 $query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan=$id");
 $post = mysqli_fetch_assoc($query);
-var_dump($post);
 
 if (isset($_POST['submit'])) {
-    var_dump($_POST);
+
     edit_post($_POST, $id);
 }
 

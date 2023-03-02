@@ -5,7 +5,12 @@ if (isset($_POST['login'])) {
     login();
 }
 if (isset($_SESSION['user'])) {
-    header('Location:main.php');
+    if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'editor') {
+        header('location:admin.php');
+    } else {
+        header('location:blogmenu.php');
+    }
+    // header('Location:main.php');
 }
 
 ?>

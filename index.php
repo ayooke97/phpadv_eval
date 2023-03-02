@@ -1,1 +1,1 @@
-<?= header("location:./View/main.php"); ?>
+<?= header("location:./View/login.php"); ?>
