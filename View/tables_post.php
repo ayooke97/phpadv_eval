@@ -3,11 +3,10 @@
 <html lang="en">
 <?php
 include_once('../srv/config.php');
-$user = read('user');
+$post = read('post');
 if (isset($_POST['logout']) || empty($_SESSION['user'])) {
     logout();
 }
-
 ?>
 
 <head>
@@ -115,7 +114,7 @@ if (isset($_POST['logout']) || empty($_SESSION['user'])) {
 
                 <!-- Begin Page Content -->
                 <?php if ($_SESSION['user']['role'] == 'admin') :
-                    include_once('./table_u.php');
+                    include_once('./table_p.php');
                 else :
                     include_once('./403.php');
                 endif; ?>

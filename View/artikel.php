@@ -6,7 +6,7 @@
             <h1>User</h1>
         <?php endif ?>
     <?php else : ?>
-        <h1>LU SIAPA COK?</h1>
+        <h1>Kamu siapa?</h1>
     <?php endif ?>
     <header>
         <h2>Judul</h2>

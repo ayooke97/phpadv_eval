@@ -18,9 +18,9 @@ try {
 
 function login()
 {
-    global $conn;
     $username = $_POST['username'];
     $password = $_POST['password'];
+    global $conn;
     $checkadmin = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
     if (mysqli_num_rows($checkadmin) > 0) {
         $_SESSION['login_input'] = $_POST;
@@ -104,6 +104,9 @@ function read($data)
             break;
         case 'produk':
             $data = 'produk';
+            break;
+        case 'kategori':
+            $data = 'kategori';
     }
     // var_dump($data);
     // die;
@@ -258,17 +261,28 @@ function tambah_post()
         echo "<script>alert('Judul sudah ada')</script>";
         $_SESSION['judul'] = $_POST;
     } else {
-        $query = "INSERT INTO post (idPostingan,judul,isi,tanggalDibuat,kategoriID,user_id) VALUES ('', '$judul', '$isi',$tanggal,'$kategori','$userid')";
+        $query = "INSERT INTO post (idPostingan,judul,isi,kategoriID,user_id) VALUES ('', '$judul', '$isi','$kategori','$userid')";
         if (isset($_SESSION['judul'])) {
             unset($_SESSION['judul']);
         }
         $exec = mysqli_query($conn, $query);
-        echo "<script>alert('Blog berhasil ditambah!')</script>";
-        // echo '<meta http-equiv="refresh" content="1; url=admin.php" />';
 
-        header('location:../View/admin.php');
+        echo "<script>alert('Blog berhasil ditambah!')</script>";
+
+        // echo '<meta http-equiv="refresh" content="1; url=admin.php" />';
+        sleep(3);
+        // header('location:../View/admin.php');
+        echo "<script>window.location.replace('admin.php')</script>";
         return $exec;
     }
     // $stmt = mysqli_query($conn, $query);
     // return $stmt;
+}
+
+function user()
+{
+    global $conn;
+    $username = $_SESSION['user']['username'];
+    $query = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+    return mysqli_fetch_assoc($query);
 }

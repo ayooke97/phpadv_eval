@@ -3,9 +3,9 @@ include_once '../srv/config.php';
 
 // $id =  base64_decode($_GET['user_id'], 1);
 // $id = $_GET['idPostingan'];
-$query = mysqli_query($conn, "SELECT * FROM post");
-$user = mysqli_fetch_assoc($query);
-// var_dump($user);
+$kategori = mysqli_query($conn, "SELECT * FROM kategori");
+var_dump(user());
+$user = user();
 
 if (isset($_POST['submit'])) {
     // var_dump($_POST);
@@ -34,11 +34,14 @@ if (isset($_POST['submit'])) {
                     <div class="form-group d-flex flex-column">
                         <label for="penerbit">Kategori</label>
                         <select name="kategori">
-                            <option value="1">1</option>
+                            <!-- <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="5">5</option> -->
+                            <?php foreach ($kategori as $kat) : ?>
+                                <option value="<?= $kat['idKategori'] ?>"><?= $kat['namaKategori'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">

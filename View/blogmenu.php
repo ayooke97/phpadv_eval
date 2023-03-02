@@ -9,6 +9,11 @@ if (isset($_SESSION['user'])) {
 if (isset($_POST['logout'])) {
     logout();
 }
+$user = read('post');
+$query = mysqli_query($conn, "SELECT * FROM post");
+$post = mysqli_fetch_assoc($query);
+
+var_dump(mysqli_num_rows($query));
 
 ?>
 <html lang="en">
@@ -25,36 +30,24 @@ if (isset($_POST['logout'])) {
     <?php include_once "./navbar.php"; ?>
     <main class="container">
         <div class="row my-3">
-            <div class="col-4">
-                <article class="card w-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-success">Go somewhere</a>
+
+            <?php if (mysqli_num_rows($user) > 0) :
+                $i = 1; ?>
+                <?php foreach ($user as $user) : ?>
+                    <div class="col-4 pb-3">
+                        <article class="card w-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $i ?></h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-success">Go somewhere</a>
+                            </div>
+                        </article>
                     </div>
-                </article>
-            </div>
-            <div class="col-4">
-                <article class="card w-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-4">
-                <article class="card w-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                </article>
-            </div>
+                    <?php $i++; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
         </div>
     </main>
 </body>

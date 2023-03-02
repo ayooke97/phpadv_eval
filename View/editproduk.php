@@ -1,11 +1,12 @@
 <?php
 include_once '../srv/config.php';
 
-// $id =  base64_decode($_GET['user_id'], 1);
-$id = $_GET['user_id'];
-$query = mysqli_query($conn, "SELECT * FROM user WHERE id_produk=$id");
-$res = mysqli_fetch_assoc($query);
-var_dump($res);
+$id =  base64_decode($_GET['idProduk'], 1);
+// $id = $_GET['user_id'];
+$query = mysqli_query($conn, "SELECT * FROM produk WHERE idProduk=$id");
+$produk = mysqli_fetch_assoc($query);
+echo "<pre>";
+var_dump($produk);
 die;
 
 if (isset($_POST['submit'])) {

@@ -1,11 +1,12 @@
 <?php
 include_once '../srv/config.php';
 
-// $id =  base64_decode($_GET['user_id'], 1);
+$id =  base64_decode($_GET['idPostingan'], 1);
 // $id = $_GET['idPostingan'];
 // $query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan=$id");
-// $user = mysqli_fetch_assoc($query);
-// var_dump($result);
+$query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan=$id");
+$post = mysqli_fetch_assoc($query);
+var_dump($post);
 
 if (isset($_POST['submit'])) {
     var_dump($_POST);
@@ -32,11 +33,11 @@ if (isset($_POST['submit'])) {
                 <form action="" method="post" class="d-flex flex-column">
                     <div class="form-group">
                         <label for="Judulbuku">Judul</label>
-                        <input type="text" name="judul" value="<?= $user['username'] ?>" class="form-control">
+                        <input type="text" name="judul" value="<?= $post['judul'] ?>" class="form-control">
                     </div>
                     <div class="form-group d-flex flex-column">
                         <label for="penerbit">Isi Postingan</label>
-                        <textarea title="blog" name="isi" id="" cols="" rows=""></textarea>
+                        <textarea title="blog" name="isi" id="" cols="" rows=""><?= $post['isi'] ?></textarea>
                     </div>
                     <button class="mt-4 btn btn-success" type="submit" name="submit">Submit</button>
                 </form>

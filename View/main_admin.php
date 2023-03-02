@@ -37,92 +37,7 @@ if (isset($_POST['logout']) || empty($_SESSION['user'])) {
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-text mx-3">Wes Makmur <sup><?= $_SESSION['user']['role'] ?></sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:history.back()">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="editblog.html">Manage Blog</a>
-                        <a class="collapse-item" href="tables.php">Manage Users</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link" href="tables.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
+        <?php include_once('./sidebar.php'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -320,70 +235,70 @@ if (isset($_POST['logout']) || empty($_SESSION['user'])) {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <?php if ($_SESSION['user']['role'] == 'admin') : ?>?
-                <div class="container-fluid">
+                <?php if ($_SESSION['user']['role'] == 'admin') : ?>
+                    <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">User List</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Email/Username</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>User ID</th>
-                                            <th>Email/Username</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php $i = 1 ?>
-                                        <?php if (mysqli_num_rows($user) > 0) :
-                                            foreach ($user as $usr) : ?>
-                                                <tr>
-                                                    <td><?= $i ?></td>
-                                                    <td><?= $usr['user_id'] ?></td>
-                                                    <td><?= $usr['username'] ?></td>
-                                                    <td><?= $usr['role'] ?></td>
-                                                    <td>
-                                                        <form action="./delete.php" method="post">
-                                                            <a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
-                                                            <input type="hidden" name="id" value="<?= $usr['user_id'] ?>">
-                                                            <button class="btn btn-danger" type="submit" name="tbl_del">Delete</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            <?php $i++;
-                                            endforeach; ?>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">User List</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>User ID</th>
+                                                <th>Email/Username</th>
+                                                <th>Role</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>User ID</th>
+                                                <th>Email/Username</th>
+                                                <th>Role</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <?php $i = 1 ?>
+                                            <?php if (mysqli_num_rows($user) > 0) :
+                                                foreach ($user as $usr) : ?>
+                                                    <tr>
+                                                        <td><?= $i ?></td>
+                                                        <td><?= $usr['user_id'] ?></td>
+                                                        <td><?= $usr['username'] ?></td>
+                                                        <td><?= $usr['role'] ?></td>
+                                                        <td>
+                                                            <form action="./delete.php" method="post">
+                                                                <a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
+                                                                <input type="hidden" name="id" value="<?= $usr['user_id'] ?>">
+                                                                <button class="btn btn-danger" type="submit" name="tbl_del">Delete</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                <?php $i++;
+                                                endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                <?php else : ?>
+                    include_once('./403.php');
+                <?php endif; ?>
 
-                </div>
-            <?php else : ?>
-                include_once('./403.php');
-            <?php endif; ?>
-
-            <!-- /.container-fluid -->
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
