@@ -30,7 +30,10 @@
                          </tr>
                      </tfoot>
                      <tbody>
-                         <?php $i = 1 ?>
+                         <?php $i = 1;
+                            if (isset($_GET['search_user'])) {
+                                $user = mysqli_query($conn, "SELECT * FROM user WHERE user_id LIKE '%{$_GET['search_user']}%' OR username LIKE '%{$_GET['search_user']}%' OR role LIKE '%{$_GET['search_user']}%'");
+                            } ?>
                          <?php if (mysqli_num_rows($user) > 0) :
                                 foreach ($user as $usr) : ?>
                                  <tr>
@@ -42,12 +45,16 @@
                                          <form action="./delete.php" method="post">
                                              <a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
                                              <input type="hidden" name="id" value="<?= $usr['user_id'] ?>">
-                                             <button class="btn btn-danger" type="submit" name="tbl_del">Delete</button>
+                                             <button class="btn btn-danger" type="submit" name="user_del">Delete</button>
                                          </form>
                                      </td>
                                  </tr>
                              <?php $i++;
                                 endforeach; ?>
+                         <?php else : ?>
+                             <tr>
+                                 <td colspan="5" class="text-center">Data tidak ditemukan</td>
+                             </tr>
                          <?php endif; ?>
                      </tbody>
                  </table>

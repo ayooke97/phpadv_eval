@@ -3,9 +3,8 @@ include_once '../srv/config.php';
 
 // $id =  base64_decode($_GET['user_id'], 1);
 // $id = $_GET['idPostingan'];
-$query = mysqli_query($conn, "SELECT * FROM produk");
-$produk = mysqli_fetch_assoc($query);
-// var_dump($user);
+$query = mysqli_query($conn, "SELECT * FROM kategori");
+$kategori = mysqli_fetch_assoc($query);
 
 if (isset($_POST['submit'])) {
     // echo '<pre>';
@@ -32,6 +31,15 @@ if (isset($_POST['submit'])) {
         <div class="card my-3">
             <div class="card-body">
                 <form action="" method="post" class="d-flex flex-column" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="nama_produk">Kategori</label>
+                        <select name="kategori" id="">
+                            <?php foreach ($query as $q) : ?>
+                                <option value="<?= $q['idKategori'] ?>"><?= $q['namaKategori'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="nama_produk">Nama Produk</label>
                         <input type="text" name="nama_produk" class="form-control">

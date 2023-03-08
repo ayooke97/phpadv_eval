@@ -70,8 +70,8 @@ function register()
     // $rpass = mysqli_real_escape_string($conn, $_POST['rpass']);
     $role = $_POST['role'];
     if (empty($role)) {
-        $role = '';
-        echo "<script>alert('Silahkan pilih role')</script>";
+        $role = 'ordinaryuser';
+        // echo "<script>alert('Silahkan pilih role')</script>";
     }
 
     $pass = password_hash($pass, PASSWORD_DEFAULT);
@@ -85,7 +85,7 @@ function register()
             unset($_SESSION['v_input']);
         }
         echo '<script>alert("Pendaftaran berhasil!")</script>';
-        header('location:../View/main.php');
+        echo "<script>window.location.replace('main.php')</script>'";
         return $query;
     }
 }
@@ -151,53 +151,32 @@ function edit_post($data, $id)
     global $conn;
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
-    $tanggal = $_POST['tanggal'];
-    $query = "UPDATE post SET judul = '{$judul}', isi = '{$isi}', tanggalDibuat = '{$tanggal}' WHERE idPostingan=$id";
+    // $tanggal = $_POST['tanggal'];
+    $query = "UPDATE post SET judul = '{$judul}', isi = '{$isi}' WHERE idPostingan=$id";
     $stmt = mysqli_query($conn, $query);
+    if ($stmt) {
+        header("Location:tables_post.php");
+    }
     return $stmt;
 }
 
 function delete_post()
 {
     global $conn;
-    $id = $_POST['id'];
+    $id = base64_decode($_POST['post_id']);
     $query = mysqli_query($conn, "DELETE FROM post WHERE idPostingan= $id");
     if ($query) {
-        header("Location:tables.php");
+        header("Location:tables_post.php");
     }
     return $query;
 }
 
 function edit_produk($data, $id)
 {
-    $namaProduk = $_POST['nama_produk'];
-    $harga = $_POST['harga'];
+    $namaProduk = $data['nama_produk'];
+    $harga = $data['harga'];
     $foto = $_FILES['foto']['name'];
-    $desc = $_POST['desc'];
-    global $conn;
-    $query = "UPDATE produk SET namaProduk = '{$namaProduk}', foto = '{$foto}', harga = '{$harga}',descProduk = '{$desc}' WHERE id_produk=$id";
-    $stmt = mysqli_query($conn, $query);
-    return $stmt;
-}
-
-function delete_produk()
-{
-    global $conn;
-    $id = $_POST['id'];
-    $query = mysqli_query($conn, "DELETE FROM produk WHERE id_produk= $id");
-    if ($query) {
-        header("Location:tables.php");
-    }
-    return $query;
-}
-
-function tambah_produk()
-{
-
-    $namaProduk = $_POST['nama_produk'];
-    $harga = $_POST['harga'];
-    $foto = $_FILES['foto']['full_path'];
-    $desc = $_POST['desc'];
+    $desc = $data['desc'];
     global $conn;
     if ($foto != "") {
         $allowed_ext = ["jpg", "jpeg", "png"];
@@ -212,8 +191,60 @@ function tambah_produk()
         } else {
             if (in_array($ext, $allowed_ext) === true) {
                 move_uploaded_file($file_temp, "../View/img/" . $random_name);
-                $query = mysqli_query($conn, "INSERT INTO produk (idProduk,namaProduk,foto,harga,descProduk) VALUES ('','$namaProduk','$random_name','$harga','$desc')");
+                $query = mysqli_query($conn, "UPDATE produk SET namaProduk = '{$namaProduk}', foto = '{$foto}', harga = '{$harga}',descProduk = '{$desc}' WHERE idProduk=$id");
                 header('location:admin.php');
+            } else {
+                echo "<script>alert('File wajib berformat .jpg, .jpeg dan .png')</script>";
+            }
+        }
+    } else {
+        $query = "UPDATE produk SET namaProduk = '{$namaProduk}', harga = '{$harga}',descProduk = '{$desc}' WHERE idProduk=$id";
+        $stmt = mysqli_query($conn, $query);
+        header('location:admin.php');
+    }
+
+    return $stmt;
+}
+
+function delete_produk()
+{
+    global $conn;
+    $id = $_POST['id'];
+    $query = mysqli_query($conn, "DELETE FROM produk WHERE idProduk= $id");
+    if ($query) {
+        header("Location:tables_produk.php");
+    }
+    return $query;
+}
+
+function tambah_produk()
+{
+    $namaProduk = $_POST['nama_produk'];
+    $harga = $_POST['harga'];
+    $foto = $_FILES['foto']['full_path'];
+    $desc = $_POST['desc'];
+    $kategori = $_POST['kategori'];
+    global $conn;
+    if ($foto != "") {
+        $allowed_ext = ["jpg", "jpeg", "png"];
+        $x = explode('.', $foto);
+        $ext = strtolower(end($x));
+        $file_temp = $_FILES['foto']['tmp_name'];
+        $random_name = rand(1, 999) . '-' . $foto;
+        $size = $_FILES["foto"]["size"];
+        if ($size > 5242880) {
+            echo "<script>alert('File terlalu besar')</script>";
+            echo '<script>window.location.replace("create.php");</script>';
+            $_SESSION['produk'] = $_POST;
+        } else {
+            if (in_array($ext, $allowed_ext) === true) {
+                move_uploaded_file($file_temp, "../View/img/" . $random_name);
+                $query = mysqli_query($conn, "INSERT INTO produk (idProduk,namaProduk,foto,harga,descProduk,kategoriID) VALUES ('','$namaProduk','$random_name','$harga','$desc',$kategori)");
+                unset($_SESSION['produk']);
+                header('Location:admin.php');
+            } else {
+                echo "<script>alert('File wajib berformat .jpg, .jpeg dan .png')</script>";
+                $_SESSION['produk'] = $_POST;
             }
         }
     }
@@ -246,6 +277,9 @@ function read_post($data = '')
 function tambah_post()
 {
     global $conn;
+    $queryid = mysqli_query($conn, "SELECT * FROM post ORDER BY idPostingan DESC");
+    $res = mysqli_fetch_assoc($queryid);
+    $postid = $res['idPostingan'] + 1;
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
     $userid = $_POST['id'];
@@ -259,16 +293,16 @@ function tambah_post()
         echo "<script>alert('Judul sudah ada')</script>";
         $_SESSION['judul'] = $_POST;
     } else {
-        $query = "INSERT INTO post (idPostingan,judul,isi,kategoriID,user_id) VALUES ('', '$judul', '$isi','$kategori','$userid')";
+        $query = "INSERT INTO post (idPostingan,judul,isi,kategoriID,user_id) VALUES ($postid, '$judul', '$isi','$kategori','$userid')";
         if (isset($_SESSION['judul'])) {
             unset($_SESSION['judul']);
         }
         $exec = mysqli_query($conn, $query);
 
+        sleep(3);
         echo "<script>alert('Blog berhasil ditambah!')</script>";
 
         // echo '<meta http-equiv="refresh" content="1; url=admin.php" />';
-        sleep(3);
         // header('location:../View/admin.php');
         echo "<script>window.location.replace('admin.php')</script>";
         return $exec;

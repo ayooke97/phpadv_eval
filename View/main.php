@@ -10,10 +10,15 @@ if (isset($_POST['logout'])) {
     logout();
 }
 
-$id = $_GET['id'];
-$query = mysqli_query($conn, "SELECT * FROM post WHERE idPostingan = $id");
-$show = mysqli_fetch_assoc($query);
-
+// echo "<pre>";
+// var_dump($_SERVER);
+// die;
+if (isset($_GET['id'])) { {
+        $id = $_GET['id'];
+        $query = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.user_id = user.user_id WHERE idPostingan = $id");
+        $show = mysqli_fetch_assoc($query);
+    }
+}
 ?>
 <html lang="en">
 

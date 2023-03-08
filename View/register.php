@@ -1,15 +1,18 @@
 <?php
 include_once '../srv/config.php';
 if (isset($_POST['register'])) {
-    // var_dump($_POST);
-    // die();
     register();
 }
-if (isset($_SESSION['e_input'])) {
-    $e_input = $_SESSION['e_input'];
+if (isset($_SESSION['v_input'])) {
+    $v_input = $_SESSION['v_input'];
 }
 if (isset($_SESSION['user'])) {
     header('Location:main.php');
+}
+if (isset($v_input['role'])) {
+    $user = $v_input['role'];
+} else {
+    $user = '';
 }
 ?>
 
@@ -31,7 +34,7 @@ if (isset($_SESSION['user'])) {
         <form class="w-50 mx-auto" action="" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="username">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="username">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
@@ -42,12 +45,12 @@ if (isset($_SESSION['user'])) {
                 <label for="role" class="form-label">Mendaftar sebagai</label>
                 <div class="d-flex gap-2">
                     <!-- <input type="hidden" name="role" value=""> -->
-                    <input type="radio" name="role" id="user" value="ordinaryuser">
+                    <input type="radio" name="role" id="user" value="ordinaryuser" <?= $user == "ordinaryuser" ? 'checked' : 'checked' ?>>
                     <label for="user">User</label>
-                    <input type="radio" name="role" id="admin" value="admin">
+                    <input type="radio" name="role" id="admin" value="admin" <?= $user == "admin" ? 'checked' : '' ?>>
                     <label for="admin">Admin</label>
                     <input type="radio" name="role" id="editor" value="
-                    editor">
+                    editor" <?= $user == "editor" ? 'checked' : '' ?>>
                     <label for="editor">Editor</label>
                 </div>
             </div>

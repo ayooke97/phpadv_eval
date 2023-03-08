@@ -1,16 +1,16 @@
 <?php
 include_once '../srv/config.php';
-
 if (isset($_POST['login'])) {
     login();
 }
+
 if (isset($_SESSION['user'])) {
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'editor') {
         header('location:admin.php');
     } else {
         header('location:blogmenu.php');
     }
-    // header('Location:main.php');
+    header('Location:main.php');
 }
 
 ?>

@@ -5,7 +5,7 @@ $user = read('user');
 $blog = read('post');
 $produk = read('produk');
 $kategori = read('kategori');
-var_dump($_SESSION);
+// var_dump($_SESSION);
 if (empty($_SESSION['user']) || isset($_POST['logout'])) {
     header('Location:./403.php');
     logout();

@@ -4,7 +4,7 @@ include_once '../srv/config.php';
 // $id =  base64_decode($_GET['user_id'], 1);
 // $id = $_GET['idPostingan'];
 $kategori = mysqli_query($conn, "SELECT * FROM kategori");
-var_dump(user());
+// var_dump(user());
 $user = user();
 
 if (isset($_POST['submit'])) {

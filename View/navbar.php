@@ -8,13 +8,13 @@
             <ul class="navbar-nav ms-auto">
                 <div class="d-flex gap-3 me-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link <?= ($_SERVER['PHP_SELF'] == "/phpadv_eval/View/main.php") ? "active" : "" ?>" aria-current="page" href="./main.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./blogmenu.php">Blogs</a>
+                        <a class="nav-link <?= ($_SERVER['PHP_SELF'] == "/phpadv_eval/View/blogmenu.php") ? "active" : "" ?>" href="./blogmenu.php">Blogs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacts</a>
+                        <a class="nav-link <?= ($_SERVER['PHP_SELF'] == "/phpadv_eval/View/contact.php") ? "active" : "" ?>" href="./contact.php">Contacts</a>
                     </li>
                 </div>
                 <?php if (isset($_SESSION['user'])) : ?>

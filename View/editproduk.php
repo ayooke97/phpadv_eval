@@ -5,13 +5,12 @@ $id =  base64_decode($_GET['idProduk'], 1);
 // $id = $_GET['user_id'];
 $query = mysqli_query($conn, "SELECT * FROM produk WHERE idProduk=$id");
 $produk = mysqli_fetch_assoc($query);
-echo "<pre>";
-var_dump($produk);
-die;
+// echo "<pre>";
+// var_dump($produk);
+// die;
 
 if (isset($_POST['submit'])) {
-    var_dump($_POST);
-    edit_user($_POST, $id);
+    edit_produk($_POST, $id);
 }
 
 ?>
@@ -34,19 +33,19 @@ if (isset($_POST['submit'])) {
                 <form action="" method="post" class="" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="namaProduk">Nama Produk</label>
-                        <input type="text" name="namaProduk" value="<?= $user['username'] ?>" class="form-control">
+                        <input type="text" name="nama_produk" value="<?= $produk['namaProduk'] ?>" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="foto">Foto Produk</label>
-                        <input type="file" name="foto">
+                        <input type="file" name="foto" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="harga">Harga</label>
-                        <input type="text" name="foto">
+                        <input type="text" name="harga" value="<?= $produk['harga'] ?>" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="descProduk">Deskripsi</label>
-                        <textarea name="" id="" cols="" rows=""></textarea>
+                        <textarea name="desc" id="" cols="" rows="" class="form-control"><?= $produk['descProduk'] ?></textarea>
                     </div>
 
                     <button class="mt-4 btn btn-success btn-block" type="submit" name="submit">Submit</button>
