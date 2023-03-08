@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 05:41 AM
+-- Generation Time: Mar 08, 2023 at 06:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -39,7 +39,8 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`idKategori`, `namaKategori`, `descKategori`) VALUES
 (1, 'Tech', 'Teknologi'),
-(2, 'Tech', 'Teknologi');
+(2, 'Tech', 'Teknologi'),
+(3, 'Kesehatan', 'Mens sana in corpora sano.');
 
 -- --------------------------------------------------------
 
@@ -61,11 +62,10 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`idPostingan`, `judul`, `isi`, `tanggalDibuat`, `kategoriID`, `user_id`) VALUES
-(16, 'Judul 1', 'mari kita cobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2023-02-12', 0, 1),
+(16, 'Judul 1', 'mari kita cobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '0000-00-00', 0, 1),
 (17, 'Judul 2', 'sdfsdfsdf', '2023-02-12', 1, 1),
 (18, 'Lorem Ipsum', 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum', '0000-00-00', 2, 1),
 (19, 'Judul 3', 'random aja deh', '0000-00-00', 3, 1),
-(20, 'Judul 4 ', 'dfgndsfgjsdfhgjkdsfhgkjdsfhgkgdsjjkdsffcvbncm,xbmncxjdfhsjkgldfh;kdjfjfhgskdjfghakjdhglkajdhglkajsdhffikuwehgjkhdgkjdhjgkjdfhgksjkdfhgou3ehgpmnmngk;sdfhbkdnbv;kdfjfhjbikudshbh;sd,nvkdsfjfgnbv;kds,mnvnkdsjvbn;gsd,mvbnds;kljvbnds;f,mvb;dsd,mv;dskfbv;j,dfnvkjbsdk;jvdkjvbs;dfmgvn;ksdjnv;sd,mbvng;skdljffnv;sd,mbvn;sdkjbvn;s,dmvndkc;jnv;,dmcsvn;skdjnv;d,smnv;ksdjfnbv;,dsmvnkd;sjnvsd;,mvndkc;jvn;d,mcnv;kdsjcnv;s,mdnvkdjsnv;,sdmndcv;kjsdn;vlmdsncbv;,sdmdnbds,jjvbn', '0000-00-00', 5, 1),
 (21, 'Tuchkii', 'lyubi otusvaetsyya apci apacu apaci apacu na vsegda URAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '0000-00-00', 1, 1),
 (22, 'Lorem', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\r\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\r\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\r\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\r\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\r\nnihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\r\ntenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\r\nquia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos \r\nsapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam\r\nrecusandae alias error harum maxime adipisci amet laborum. Perspiciatis \r\nminima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit \r\nquibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur \r\nfugiat, temporibus enim commodi iusto libero magni deleniti quod quam \r\nconsequuntur! Commodi minima excepturi repudiandae velit hic maxime\r\ndoloremque. Quaerat provident commodi consectetur veniam similique ad \r\nearum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo \r\nfugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore \r\nsuscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium\r\nmodi minima sunt esse temporibus sint culpa, recusandae aliquam numquam \r\ntotam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam \r\nquasi aliquam eligendi, placeat qui corporis!\r\n', '2023-02-14', 5, 1),
 (23, 'test', 'alskdlaskdlkasldklaskldsa', '0000-00-00', 1, 1),
@@ -74,6 +74,7 @@ INSERT INTO `post` (`idPostingan`, `judul`, `isi`, `tanggalDibuat`, `kategoriID`
 (26, 'szdvsdv', 'bvvmbncv,mnm,vnbm,cvnbm,cvnbm,ncvm,bnm,cvnb,cv', '0000-00-00', 3, 1),
 (27, 'dfvdzfvdzbdfb', 'dfvbdfbfgmsgmsfmgnmsfmgsgmsgfmsgf', '0000-00-00', 1, 1),
 (28, 'ralsfnlkasfhlk', 'dfbmnsdfbkjdnfbndmbm,dfnbm,dfnbm,dfnb', '0000-00-00', 1, 1),
+(30, 'dfjdfhdkfj', 'lksdjfksdhfjksdjkfhsdjk', '2023-03-03', 2, 1),
 (33, 'jhudhulll', 'lorem doang ygy', NULL, 1, 1),
 (34, 'jhudhullle', 'lorem doang ygyy', NULL, 5, 1),
 (35, 'sdfsdfsd', 'svsdvsdvsdvsdvsdvsdv', NULL, 5, 1),
@@ -88,9 +89,12 @@ INSERT INTO `post` (`idPostingan`, `judul`, `isi`, `tanggalDibuat`, `kategoriID`
 (44, 'Lorem ipsumsf', 'dfgdsagdfsgdsfsgdfg', '2023-02-22', 1, 1),
 (45, 'sdgsdsdgsdgsdgxzvx', 'dfssdfsfsdzc', '2023-02-22', 5, 1),
 (46, 'sdgvgsdfsdgsdbcvbv v', 'sdfsdfsdfsdfsdf', '2023-02-22', 3, 1),
-(47, 'vbbmvbvb ', 'bnmbnnmnbmbnmnbm', '2023-02-22', 4, 1),
 (48, 'sfdlghjkdfghkjlfd', 'xncvb,cxcbvnmxcbmnvbxcnmvbxcm', '2023-02-22', 1, 1),
-(49, 'LOOOOLLLL', 'SDJFHLKSDHJKSDHFJHSDJKFHSDKJFHJSKDHFJKSDHFJKSD', '2023-02-22', 1, 1);
+(49, 'LOOOOLLLL', 'SDJFHLKSDHJKSDHFJHSDJKFHSDKJFHJSKDHFJKSDHFJKSD', '2023-02-22', 1, 1),
+(50, 'sdfsdfdcvxcvxcvxcvxcvxcv', 'asdfsadfsadfsadfsadfsadfsadsdafsdaasdffsdasdfsdafsdafasdf', '2023-03-03', 1, 1),
+(52, '10 Kiat untuk Jadi sehat wal afiat', 'dsfsdfsdjfksdjkfjsdkf', '2023-03-03', 3, 6),
+(53, '10 Kiat untuk sehat', 'LOREM IPSUM SEHAT AMIN', '2023-03-04', 3, 1),
+(54, 'wkwkwkwkwkwkw', 'wkwkwkwkwkwkwkwkwkwkwkwkwkwkwkwkw', '2023-03-08', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,8 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`idProduk`, `namaProduk`, `foto`, `harga`, `descProduk`, `kategoriID`) VALUES
 (3, 'r1', 'r1.jpg', 50000, 'kosong', 1),
-(4, 'r2', 'r2.jpg', 100000, 'Kualitas Ori!', 1);
+(4, 'r2', 'r2.jpg', 100000, 'Kualitas Ori!', 1),
+(9, 'ghjghjghjghjhg', '870-Capture2.PNG', 1000000, 'hgjghjghjghjghj', 3);
 
 -- --------------------------------------------------------
 
@@ -136,7 +141,8 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `role`) VALUES
 (1, 'bakti12356@gmail.com', '$2y$10$7mT.RBxzfcJs1GwNYAuo7.u65vCvEh2GsOxmfP1b60LZiUDPL6.y6', 'admin'),
 (6, 'kangeditor@gmail.com', '$2y$10$44l1gJWm4idaVQlIkasjYu0Xhmx7roD7.uUq2L4emiOhKZIlDIhQu', 'editor'),
 (14, 'kangeditoii@gmail.com', '$2y$10$mWu7A7/jFxY7arNmtkRlXO6RYldTy.rP6M.QWfg3quQPNgmfMhgvK', 'ordinaryuser'),
-(15, 'ngetesdoang123', '$2y$10$Y4nBAGXr7qe/.lzSpj8fhea9bavnjHLjgAGszXu1kV3xJaCnwyF2e', 'admin');
+(16, 'bakti', '$2y$10$JFgdYUMaftp1oo3w/tB0Ce.5N/J0pzJ8n1jZ9CSOjIv7WFk4AtFFK', ''),
+(17, 'editoramatir@gmail.com', '$2y$10$CLD8zL1lNOdRQjIZSixzuOcrN13RRJ7UC3w9bB26UXsQwhsXmyV/O', '');
 
 --
 -- Indexes for dumped tables
@@ -176,25 +182,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `post`
---
-ALTER TABLE `post`
-  MODIFY `idPostingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `idKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
@@ -210,7 +210,7 @@ ALTER TABLE `post`
 -- Constraints for table `produk`
 --
 ALTER TABLE `produk`
-  ADD CONSTRAINT `fk_kategori_produk` FOREIGN KEY (`kategoriID`) REFERENCES `kategori` (`idKategori`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_kategori_produk` FOREIGN KEY (`kategoriID`) REFERENCES `kategori` (`idKategori`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
