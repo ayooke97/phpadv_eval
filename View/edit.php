@@ -1,15 +1,11 @@
 <?php
 include_once '../srv/config.php';
 
-// $id =  base64_decode($_GET['user_id'], 1);
-$id = $_GET['user_id'];
-$query = mysqli_query($conn, "SELECT * FROM user WHERE user_id=$id");
-$user = mysqli_fetch_assoc($query);
-// var_dump($result);
-
+$user = user();
+$id = $user['user_id'];
 if (isset($_POST['submit'])) {
     // var_dump($_POST);
-    edit_user($_POST, $id);
+    gantiPassword($_POST);
 }
 
 ?>
@@ -32,23 +28,14 @@ if (isset($_POST['submit'])) {
                 <form action="" method="post" class="">
                     <div class="form-group">
                         <label for="Judulbuku">Username / Email</label>
-                        <input type="text" name="username" value="<?= $user['username'] ?>" class="form-control">
+                        <input readonly type="text" name="username" value="<?= $user['username'] ?>" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="penerbit">Password</label>
-                        <input type="password" name="pass" value="" class="form-control">
+                        <input type="password" name="oldpass" value="" class="form-control">
                     </div>
                     <label for="th_terbit">Re-Enter Password</label>
-                    <input type="text" name="rpass" value="" class="form-control">
-                    <label for="sinopsis">Role</label>
-                    <div class="d-flex my-2 gap-2">
-                        <input type="radio" name="role" id="" value="admin" <?= $user['role'] == 'admin' ? 'checked' : '' ?>>
-                        <label for="admin">Admin</label>
-                        <input type="radio" name="role" id="" value="editor" <?= $user['role'] == 'editor' ? 'checked' : '' ?>>
-                        <label for="editor">Editor</label>
-                        <input type="radio" name="role" id="" value="ordinaryuser" <?= $user['role'] == 'ordinaryuser' ? 'checked' : '' ?>>
-                        <label for="user">User</label>
-                    </div>
+                    <input type="password" name="newpass" value="" class="form-control">
                     <button class="mt-4 btn btn-success btn-block" type="submit" name="submit">Submit</button>
                 </form>
             </div>

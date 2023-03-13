@@ -311,10 +311,82 @@ function tambah_post()
     // return $stmt;
 }
 
+function tambah_kategori()
+{
+    global $conn;
+    $nama = $_POST['namaKategori'];
+    $deskripsi = $_POST['descKategori'];
+    if (empty($nama)) {
+        echo "<script>alert('Nama kategori wajib diisi')</script>";
+    }
+    $check = mysqli_query($conn, "SELECT * FROM kategori WHERE namaKategori = '$nama'");
+    if (mysqli_num_rows($check) > 0) {
+        echo "<script>alert('Nama kategori sudah ada')</script>";
+        $_SESSION['kategori'] = $_POST;
+    } else {
+        $query = "INSERT INTO kategori (idKategori,namaKategori,descKategori) VALUES ('', '$nama', '$deskripsi')";
+        if (isset($_SESSION['kategori'])) {
+            unset($_SESSION['kategori']);
+        }
+        $exec = mysqli_query($conn, $query);
+
+        sleep(3);
+        echo "<script>alert('Kategori berhasil ditambah!')</script>";
+
+        // echo '<meta http-equiv="refresh" content="1; url=admin.php" />';
+        // header('location:../View/admin.php');
+        echo "<script>window.location.replace('tables_kategori.php')</script>";
+        return $exec;
+    }
+    // $stmt = mysqli_query($conn, $query);
+    // return $stmt;
+}
+
+function edit_kategori($data, $id)
+{
+    global $conn;
+    $nama = $_POST['namaKategori'];
+    $deskripsi = $_POST['descKategori'];
+    // $tanggal = $_POST['tanggal'];
+    $query = "UPDATE kategori SET namaKategori = '{$nama}', descKategori = '{$deskripsi}' WHERE idKategori=$id";
+    $stmt = mysqli_query($conn, $query);
+    if ($stmt) {
+        header("Location:tables_kategori.php");
+    }
+    return $stmt;
+}
+
+function delete_kategori()
+{
+    global $conn;
+    $id = $_POST['id'];
+    $query = mysqli_query($conn, "DELETE FROM kategori WHERE idKategori= $id");
+    if ($query) {
+        header("Location:tables_produk.php");
+    }
+    return $query;
+}
+
 function user()
 {
     global $conn;
     $username = $_SESSION['user']['username'];
     $query = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
     return mysqli_fetch_assoc($query);
+}
+
+function gantiPassword($data)
+{
+    global $conn;
+    $user = user();
+    $id = $user['user_id'];
+    $oldpass = password_hash($data['oldpass'], PASSWORD_DEFAULT);
+    $newpass = password_hash($data['newpass'], PASSWORD_DEFAULT);
+    if ($oldpass != $newpass) {
+        $query = mysqli_query($conn, "UPDATE user SET password = '$newpass' WHERE user_id = $id");
+        if ($query) {
+            logout();
+            unset($_SESSION['user']);
+        }
+    }
 }

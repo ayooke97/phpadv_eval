@@ -11,14 +11,18 @@ if (isset($_POST['logout'])) {
 }
 
 // echo "<pre>";
-// var_dump($_SERVER);
 // die;
-if (isset($_GET['id'])) { {
-        $id = $_GET['id'];
-        $query = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.user_id = user.user_id WHERE idPostingan = $id");
-        $show = mysqli_fetch_assoc($query);
-    }
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = mysqli_query($conn, "SELECT * FROM post INNER JOIN user ON post.user_id = user.user_id WHERE idPostingan = $id");
+    $show = mysqli_fetch_assoc($query);
 }
+
+$produk = read('produk');
+$fproduk = mysqli_fetch_assoc($produk);
+echo "<pre>";
+var_dump($fproduk);
+echo "</pre>";
 ?>
 <html lang="en">
 
@@ -93,6 +97,8 @@ if (isset($_GET['id'])) { {
     <footer class="text-center my-3 py-5 border border-2">
         2023 Wes Makmur. All rights reserved.
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>

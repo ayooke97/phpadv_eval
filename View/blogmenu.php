@@ -10,10 +10,7 @@ include_once "../srv/config.php";
 if (isset($_POST['logout'])) {
     logout();
 }
-$user = read('post');
-$query = mysqli_query($conn, "SELECT * FROM post");
-$post = mysqli_fetch_all($query);
-
+$rpost = read('post');
 // var_dump($post);
 
 
@@ -34,22 +31,22 @@ $post = mysqli_fetch_all($query);
     <main class="container">
         <div class="row my-3">
 
-            <?php if (mysqli_num_rows($user) > 0) :
+            <?php if (mysqli_num_rows($rpost) > 0) :
                 $i = 1;
-                $idcount = 0; ?>
-                <?php foreach ($user as $usr) : ?>
+            ?>
+                <?php foreach ($rpost as $rps) : ?>
                     <div class="col-4 pb-3">
                         <article class="card w-100">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="img/854-random.png" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title"><?= $post[$idcount][1] ?></h5>
+                                <h5 class="card-title"><?= $rps['judul'] ?></h5>
                                 <p class="card-text">Click to read</p>
-                                <a href="./main.php?id=<?= $post[$idcount][0] ?>" class="btn btn-success">Read Now</a>
+                                <a href="./main.php?id=<?= $rps['idPostingan'] ?>" class="btn btn-success">Read Now</a>
                             </div>
                         </article>
                     </div>
                     <?php $i++;
-                    $idcount++ ?>
+                    ?>
                 <?php endforeach; ?>
             <?php endif; ?>
 

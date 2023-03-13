@@ -15,18 +15,18 @@
                      <thead>
                          <tr>
                              <th>No</th>
-                             <th>User ID</th>
-                             <th>Email/Username</th>
-                             <th>Role</th>
+                             <th>Produk ID</th>
+                             <th>Nama Produk</th>
+                             <th>Foto Produk</th>
                              <th>Action</th>
                          </tr>
                      </thead>
                      <tfoot>
                          <tr>
                              <th>No</th>
-                             <th>User ID</th>
-                             <th>Email/Username</th>
-                             <th>Role</th>
+                             <th>Produk ID</th>
+                             <th>Nama Produk</th>
+                             <th>Foto Produk</th>
                              <th>Action</th>
                          </tr>
                      </tfoot>

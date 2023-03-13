@@ -16,12 +16,22 @@
                     <li class="nav-item">
                         <a class="nav-link <?= ($_SERVER['PHP_SELF'] == "/phpadv_eval/View/contact.php") ? "active" : "" ?>" href="./contact.php">Contacts</a>
                     </li>
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= $_SESSION['user']['username'] ?>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="edit.php">Edit</a></li>
+                                <form action="" method="post">
+                                    <li><button class="dropdown-item" type="submit" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 </div>
-                <?php if (isset($_SESSION['user'])) : ?>
-                    <form action="" method="post">
-                        <button type="submit" class="btn btn-outline-danger" name="logout">Logout</button>
-                    </form>
-                <?php else : ?>
+
+                <?php if (empty($_SESSION['user'])) : ?>
                     <div class="d-flex gap-2">
                         <a class="btn btn-outline-warning" href="register.php">Sign Up</a>
                         <a class="btn btn-outline-success" href="login.php">Login</a>

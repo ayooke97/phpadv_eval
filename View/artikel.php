@@ -6,7 +6,7 @@
     <?php endif ?>
     <header>
         <h2><?= isset($_GET['id']) ? $show['judul'] : "Judul" ?></h2>
-        <p>Ditulis oleh : Manusia <sub><?= ($_SERVER['HTTP_REFERER'] == "http://localhost/phpadv_eval/View/blogmenu.php") ? $show['tanggalDibuat'] : date("d-M-Y") ?><sub></p>
+        <p>Ditulis oleh : <?= isset($_GET['id']) ? $show['username'] : "Manusia" ?> <sub><?= ($_SERVER['HTTP_REFERER'] == "http://localhost/phpadv_eval/View/blogmenu.php") ? $show['tanggalDibuat'] : date("d-M-Y") ?><sub></p>
     </header>
     <p class="fw-bold">Penjelasan singkat</p>
     <section class="text-break text-justify">
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col">
-                            <img src="" alt="test" srcset="">
+                            <img src="img/190-fauzan-H-dd646Xuz4-unsplash.jpg" width="50px" height="50px" alt="test" srcset="">
                             <div class="col">
                                 <div>Nama Jamu</div>
                                 <div>Khasiat</div>
@@ -33,7 +33,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col">
-                            <img src="" alt="test" srcset="">
+                            <img src="img/190-fauzan-H-dd646Xuz4-unsplash.jpg" width="50px" height="50px" alt="test" srcset="">
                             <div class="col">
                                 <div>Nama Jamu</div>
                                 <div>Khasiat</div>
@@ -47,7 +47,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col">
-                            <img src="" alt="test" srcset="">
+                            <img src="img/190-fauzan-H-dd646Xuz4-unsplash.jpg" width="50px" height="50px" alt="test" srcset="">
                             <div class="col">
                                 <div>Nama Jamu</div>
                                 <div>Khasiat</div>
@@ -61,7 +61,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col">
-                            <img src="" alt="test" srcset="">
+                            <img src="img/190-fauzan-H-dd646Xuz4-unsplash.jpg" width="50px" height="50px" alt="test" srcset="">
                             <div class="col">
                                 <div class="fw-bold">Nama Jamu</div>
                                 <div>Khasiat</div>
@@ -82,7 +82,7 @@
             <div class="col-5">
                 <?php if (isset($_POST['rekomjamu'])) :
                     include_once '../jamu.php'; ?>
-                    <img src="" alt="gambarjamu" srcset="">
+                    <img src="img/190-fauzan-H-dd646Xuz4-unsplash.jpg" class="mb-3" width="100%" height="150px" alt="gambarjamu" style="background-size:cover;" srcset="">
                     <p>Nama : <?= $_POST['nama'] ?></p>
                     <p>Umur : <?= $saran->umur($_POST['tgl_lahir']) ?> tahun</p>
                     <p>Jamu rekomendasi : <?= $saran->namaJamu($_POST['keluhan1'], $_POST['keluhan2']) ?></p>

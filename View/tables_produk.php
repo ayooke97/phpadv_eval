@@ -114,7 +114,7 @@ if (isset($_POST['logout']) || empty($_SESSION['user'])) {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <?php if ($_SESSION['user']['role'] == 'admin') :
+                <?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'editor') :
                     include_once('./table_pr.php');
                 else :
                     include_once('./403.php');

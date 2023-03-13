@@ -5,8 +5,9 @@
 
      <!-- DataTales Example -->
      <div class="card shadow mb-4">
-         <div class="card-header py-3">
+         <div class="card-header py-3 d-flex align-items-center" style="column-gap:1rem;">
              <h6 class="m-0 font-weight-bold text-primary">User List</h6>
+             <a href="./createproduk.php" class="btn btn-primary rounded">Create</a>
          </div>
          <div class="card-body">
              <div class="table-responsive">
@@ -36,19 +37,21 @@
                             } ?>
                          <?php if (mysqli_num_rows($user) > 0) :
                                 foreach ($user as $usr) : ?>
-                                 <tr>
-                                     <td><?= $i ?></td>
-                                     <td><?= $usr['user_id'] ?></td>
-                                     <td><?= $usr['username'] ?></td>
-                                     <td><?= $usr['role'] ?></td>
-                                     <td>
-                                         <form action="./delete.php" method="post">
-                                             <a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
-                                             <input type="hidden" name="id" value="<?= $usr['user_id'] ?>">
-                                             <button class="btn btn-danger" type="submit" name="user_del">Delete</button>
-                                         </form>
-                                     </td>
-                                 </tr>
+                                 <?php if ($_SESSION['user']['username'] != $usr['username']) : ?>
+                                     <tr>
+                                         <td><?= $i ?></td>
+                                         <td><?= $usr['user_id'] ?></td>
+                                         <td><?= $usr['username'] ?></td>
+                                         <td><?= $usr['role'] ?></td>
+                                         <td>
+                                             <form action="./delete.php" method="post">
+                                                 <a class="btn btn-warning" href='./edit.php?user_id=<?= $usr['user_id'] ?>'>Edit</a>
+                                                 <input type="hidden" name="id" value="<?= $usr['user_id'] ?>">
+                                                 <button class="btn btn-danger" type="submit" name="user_del">Delete</button>
+                                             </form>
+                                         </td>
+                                     </tr>
+                                 <?php endif; ?>
                              <?php $i++;
                                 endforeach; ?>
                          <?php else : ?>
